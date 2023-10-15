@@ -7,19 +7,17 @@
 import { StatusCodes } from 'http-status-codes'
 import { boardService } from '~/services/boardService'
 import ApiError from '~/utils/ApiError'
+import { ApiResponse } from '~/utils/ApiResponse'
 
 
 const createNew = async(req, res, next) => {
   try {
-    // Điều hướng dữ liệu sang tầng Service
+    // lấy kết quả từ tầng Service
     const createdBoard = await boardService.createNew(req.body)
-
-    res.status(StatusCodes.CREATED).json(createdBoard)
+    res.status(StatusCodes.CREATED).json(new ApiResponse(StatusCodes.CREATED, createdBoard, !Boolean(createdBoard)))
   } catch (error) {
     next(error)
   }
-
-
 }
 
 export const boardController = {
