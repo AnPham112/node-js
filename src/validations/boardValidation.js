@@ -16,12 +16,13 @@ const createNew = async (req, res, next) => {
   })
 
   try {
+    // abortEarly: false trả về nhiều lỗi nếu có
     await correctCondition.validateAsync(req.body, { abortEarly: false })
     next()
   } catch (error) {
     const errorMessage = new Error(error).message
-    const customMessage = new ApiError(StatusCodes.UNPROCESSABLE_ENTITY, errorMessage)
-    next(customMessage)
+    const customError = new ApiError(StatusCodes.UNPROCESSABLE_ENTITY, errorMessage)
+    next(customError)
   }
 }
 

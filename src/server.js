@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import express from 'express'
 import exitHook from 'async-exit-hook'
 import { CONNECT_DB, CLOSE_DB } from '~/config/mongodb'
@@ -13,7 +14,6 @@ const START_SERVER = () => {
   app.use(errorHandlingMiddleware)
 
   app.listen(env.APP_PORT, env.APP_HOST, () => {
-    // eslint-disable-next-line no-console
     console.log(`3. I am running at http://${ env.APP_HOST }:${ env.APP_PORT }/`)
   })
 
