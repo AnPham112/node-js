@@ -15,5 +15,7 @@ Router.route('/')
     res.status(StatusCodes.OK).json({ message: 'cc' })
   })
   .post(boardValidation.createNew, boardController.createNew)
+Router.route('/:id')
+  .get(boardController.getDetails)
 
 export const boardRoute = Router

@@ -42,10 +42,24 @@ const findOneById = async (id) => {
   }
 }
 
+const getDetails = async (id) => {
+  try {
+    const result = await GET_DB().collection(BOARD_COLLECTION_NAME).findOne({
+      // giúp parse string sang kiểu ObjectId, nếu đã là ObjectId thì vẫn giữ nguyên kiểu
+      _id: new ObjectId(id)
+    })
+    return result
+  } catch (error) {
+    // Dùng class built-in Error để thấy được lỗi ở phía database trả về
+    throw new Error(error)
+  }
+}
+
 export const boardModel = {
   BOARD_COLLECTION_NAME,
   BOARD_COLLECTION_SCHEMA,
   createNew,
   findOneById,
-  validateBeforeCreate
+  validateBeforeCreate,
+  getDetails
 }
